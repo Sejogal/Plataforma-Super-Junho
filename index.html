@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Super Junho</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PLATAFORMA SUPER JUNHO</h1>
+    
+        <div class="containerBtn">
+            <button class="btnAbrirModal" onclick="abrirModal()" >Criar Time</button>
+            <button class="btnDeleteTime" onclick="deletarTime()">Apagar Time</button>
+            <button class="btnExplorar" onclick="iniciarJogo()" >Iniciar</button>
+        </div>
+        <div class="hidden" id="modal">
+            <div class="modal-content">
+                <span class="close" onclick="fecharModal()">&times;</span>
+                <h2>Criar Time</h2>
+                <!-- <form id="criarTimeForm"> -->
+                    <label for="nomeTime">Nome do Time:</label>
+                    <input type="text" id="nomeTime" name="nomeTime" required>
+                    <input type="file" name="picture" id="picture" accept="image/*" required>
+                    <button class="btnCriarTime"  onclick="criarTime()" >Criar</button>
+                <!-- </form> -->
+        </div>
+        </div>
+    </div>
+    <br>
+
+    <div id="containerTime" >
+        <h2 id="titleTime" >Times Criados</h2>
+        <div id="listaTimes">
+            <!-- Os times criados serão adicionados aqui -->    
+        </div>
+    </div>
+
+</body>
+<script src="/src/js/script.js"></script>
+</html>
