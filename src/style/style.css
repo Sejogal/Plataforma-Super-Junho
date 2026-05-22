@@ -1,0 +1,233 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1{
+    font-size: 36px;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+body{
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    background-image: url('/src/media/3.png');
+    background-size: cover;
+}
+.btnAbrirModal{
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnCriarTime{
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnDeleteTime{
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btnIniciar{
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.container{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.containerBtn{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* MODAL */
+/* Fundo da modal */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+/* Caixa da modal */
+.modal-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    animation: aparecer 0.3s ease;
+}
+
+/* Animação */
+@keyframes aparecer {
+    from{
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Título */
+.modal-content h2{
+    text-align: center;
+    color: #222;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* Labels */
+.modal-content label{
+    font-size: 15px;
+    color: #444;
+    font-weight: 600;
+}
+
+/* Inputs */
+.modal-content input[type="text"],
+.modal-content input[type="file"]{
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    outline: none;
+    transition: 0.3s;
+    font-size: 15px;
+    background: #f8f8f8;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="file"]:focus{
+    border-color: #d4af37;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+}
+
+/* Botão */
+.btnCriarTime{
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #d4af37;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnCriarTime:hover{
+    transform: translateY(-2px);
+    background: #c29b22;
+    box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+}
+
+/* Botão fechar */
+.close{
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    font-size: 28px;
+    color: #666;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover{
+    color: #d4af37;
+    transform: rotate(90deg);
+}
+
+.hidden{
+    display: none; 
+}
+.show{
+    display: block; 
+}
+
+.containerPontos{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+p{
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+#containerTime{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#containerTime div{
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+.containerDesafios{
+    display: block;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
