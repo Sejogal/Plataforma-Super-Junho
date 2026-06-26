@@ -1,17 +1,19 @@
 //
 
-const senhaUniversal = "bi12copr";
+const senhaUniversal = "bi39copr";
 
 const audio = new Audio("/src/media/main_theme_party_hard_soundtrack_mp3_33748.mp3");
 
-function tocarMusica() {
-    audio.play().catch((e) => {
-        console.log(e);
-    });
-}
-document.addEventListener("click", () => {
-    tocarMusica();
-}, { once: true });
+audio.play();
+audio.loop=true
+
+const som_quiz = new Audio("/src/media/som_quiz.mp3")
+const som_pre_quiz = new Audio("/src/media/som_pre_quiz.mp3")
+
+const containerQuiz = document.getElementById("containerQuiz");
+const container = document.getElementById("container");
+
+
 
 //-------------------------------------------------------------------------
 
@@ -22,7 +24,7 @@ let listaTimes = document.getElementById("listaTimes");
 function abrirModal() {
     let modal = document.getElementById("modal");
     modal.classList.add("show");
-   
+
 }
 
 const fecharModal = () => {
@@ -39,7 +41,7 @@ function criarTime() {
 
         let reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
 
             let imagemBase64 = e.target.result;
 
@@ -83,7 +85,7 @@ function criarTime() {
     }
 }
 
-function limparInputFile(){
+function limparInputFile() {
     let pictureInput = document.getElementById("picture");
     pictureInput.value = "";
 }
@@ -108,6 +110,7 @@ function exibirTimes() {
             ${time.nomeDoTime}: ${time.pontos} pontos
         </div>
         `;
+
     });
 
     // listaTimes.style.borderBottom = "3px solid #333";
@@ -115,21 +118,56 @@ function exibirTimes() {
 setInterval(exibirTimes, 1000); // Atualiza a exibição dos times a cada segundo
 
 
+function exibirTimes2() {
+    const dadosTimeMaster = JSON.parse(localStorage.getItem("dadosTimeMaster")) || [];
+
+    listaTimes2.innerHTML = "";
+
+    dadosTimeMaster.forEach((time) => {
+
+        listaTimes2.innerHTML += `
+        <div>
+            <img 
+                style="border-radius:50%; border:2px solid #333;" 
+                src="${time.picture}" 
+                alt="${time.nomeDoTime}" 
+                width="70" 
+                height="70"
+            >
+
+            ${time.nomeDoTime}: ${time.pontos} pontos
+        </div>
+        `;
+
+    });
+
+    // listaTimes.style.borderBottom = "3px solid #333";
+}
+setInterval(exibirTimes2, 1000); // Atualiza a exibição dos times a cada segundo
 
 function iniciarJogo() {
     const dadosTimeMaster = JSON.parse(localStorage.getItem("dadosTimeMaster")) || [];
-    
-    if(dadosTimeMaster.length === 0) {
+
+    if (dadosTimeMaster.length === 0) {
         alert("Crie um time para iniciar o jogo!");
     }
     else{
-        window.location.href = "/src/templates/inicio.html";
+        audio.pause();
+        som_pre_quiz.play();
+        exibirTimes()
+        containerQuiz.classList.remove("hidden");
+        containerQuiz.classList.add("container");
+        container.classList.add("hidden");
+        document.getElementById("containerTime1").classList.add("hidden")
+        document.getElementById("btnSobre").style.display ="none"
+        contagemRegressiva()
     }
 }
 
+
 function deletarTime() {
 
-    const senha = prompt("Digite a senha para deletar os times:"); 
+    const senha = prompt("Digite a senha para deletar os times:");
     if (senha === senhaUniversal) {
         localStorage.removeItem("dadosTimeMaster");
         listaTimes.innerHTML = "";
@@ -143,10 +181,10 @@ function deletarTime() {
 
 let dadosTimeMaster = JSON.parse(localStorage.getItem("dadosTimeMaster")) || []; // Variavel que armazena os times na localStorage
 
-function verifica(){
+function verifica() {
     if (dadosTimeMaster.length === 0) {
-    document.getElementById("titleTime").innerHTML = "Nenhum time criado ainda!";
-    btnIniciar.style.display = "none";
+        document.getElementById("titleTime").innerHTML = "Nenhum time criado ainda!";
+        btnIniciar.style.display = "none";
     }
 
 }
@@ -159,56 +197,107 @@ function acessarPainelAdm() {
         window.location.href = "/src/templates/adm/dashboard.html";
     } else {
         alert("Senha incorreta! Acesso negado.");
-    } 
+    }
 }
 
 const enigmas = [
+    // 1* RODADA - enigmas
+    {
+        titulo: "Categoria - Enigmas"
+    },
     {
         id: 1,
         pergunta: "Sou aberto todos os dias, ensino sem falar, guardo histórias antigas. O que sou?",
         resposta: "BÍBLIA "
     },
-    { 
+    {
         id: 2,
-        pergunta: "“Eles caminharam com Jesus. Digam seus nomes. (Num quadro ou bloco de nota invisível para os outros time)” ",
-        resposta: "Paulo, Pedro, João, Tiago, Tomé, Mateus, Judas Iscariotes, Simão Zelote, Bartolomeu, Filipe, André e Judas Tadeu"
+        pergunta: "A soma do versículo e o capítulo é a resposta <br/> “Mas buscai primeiro o Reino de Deus e a sua justiça, e todas estas coisas vos serão acrescentadas”",
+        resposta: "39"
     },
     {
         id: 3,
-        pergunta: "“Onde a voz ecoa sem boca?”",
-        resposta: "COLUNA"
+        pergunta: "“Eles caminharam com Jesus. Digam seus nomes.",
+        resposta: "Paulo, Pedro, João, Tiago, Tomé, Mateus, Judas Iscariotes, Simão Zelote, Bartolomeu, Filipe, André e Judas Tadeu"
     },
     {
         id: 4,
-        pergunta: "“O que é que tem lentes e vê tudo, mas não tem olhos?”",
-        resposta: "PROJETOR"
+        pergunta: "“Emito som todos os domingo mesmo sem boca?”",
+        resposta: "COLUNA",
+        imagem: "/src/img/coluna.png" //qrcode será imprimido
     },
     {
         id: 5,
-        pergunta: "Jogo da Velha no quadro",
-        resposta: "JOGO DA VELHA"
+        pergunta: "“Quanto mais escuro o ambiente, melhor eu trabalho.Transformo uma pequena imagem numa grande apresentação.Quem sou eu?”",
+        resposta: "PROJETOR"
     },
     {
         id: 6,
-        pergunta: "“Hora do desafio KAHOOT”",
-        resposta: "GARRAFA",
+        pergunta: "“Quando passei na Travessa comandante Bula vi 10 árvores a minha esquerda e quando regressei vi 10 árvores a minha direita. Quantas árvores eu vi no total ?”",
+        resposta: "10"
+    },
+    // Segunda rodada Memória --------------------------------------------------------------------------
+    {
+        titulo: "Categoria - Memória",
+        pergunta: "Decora a sequência (dos livros da biblia) ...."
+    },
+
+    // Terceira Rodada - Lógica -----------------------------------------------------------------
+    {
+        titulo: "Lógica",
+    },
+    {
+        titulo: "Jogo da Velha no quadro",
+        resposta: "X - O"
+    },
+    {
+        
+        titulo: "Liga Números",
+        pergunta: "Os participantes devem ligar os números no quadro sem cruzar as linhas",
+        imagem: "/src/media/jogos-logica-spj/liga-numeros-sem-chocar.png"
+    },
+    {
+        
+        titulo: "Move um pau",
+        pergunta: "Os participantes devem mover um pau e completar a operação",
+        imagem: "/src/media/jogos-logica-spj/mova-um-pau.png"
+    },
+    {
+        titulo: "SUDOKU",
+        pergunta: "Os participantes devem jogar no quadro....",
+        imagem: "/src/media/jogos-logica-spj/sudoku.png"
+    },
+    {
+       
+        titulo: "Remova uma linha",
+        pergunta: "Remova uma linha e faça um quadrado....",
+        imagem: "/src/media/jogos-logica-spj/remove-uma-linha-e-quadrado .png"
+    },
+    {
+    
+        titulo: "Soma das letras",
+        pergunta: "Remova uma linha e faça um quadrado....",
+        imagem: "/src/media/4.png"
+    },
+    {
+        //Sequência numérica
+      
+        titulo: "2, 4, 8, 16, ?",
+        resposta: "32"
+    },
+
+    // Última rodada
+    {
+        titulo: "“Hora do desafio KAHOOT”",
+        pergunta: "Leiam o QR CODE no objeto do Desafio - 4",
         imagem: "/src/img/kahoot.png"
     },
+    // FIM
     {
-        id: 7,
-        pergunta: "“Hora do quiz Feira Comunitária”",
-        resposta: "",
-        imagem: "/src/media/qrcode_quiz-feira-comunit-ria.onrender.com.png"
-    },
-    {
-        id: 8,
-        pergunta: "“Desafio Travessia da Fé",
-        resposta: "Objetivo: Passar objetos com olhos vendados (E a equipe só pode falar no máximo 10 vezes para ajudar o amigo a chegar no fim)",
-    },
-    {
-        id: 9,
-        pergunta: "“DESAFIO FINAL”",
-        resposta: "As equipes irão pegar os 2 primeiros caractéres de cada resposta correta e formar a senha para desbloquear o prêmio.",
+        id: 100,
+        titulo:"“DESAFIO FINAL”",
+        pergunta: "As equipes irão pegar as 2 primeiras letras das respostas correta 1,2,4,5 e formar a senha para completar o desafio final.",
+        resposta: "As equipes irão pegar os 2 primeiros caractéres das respostas correta 1,2,4,5 e formar a senha para desbloquear o prêmio.",
         imagem: "/src/img/desafio_final.png"
     }
 
@@ -216,6 +305,8 @@ const enigmas = [
 
 let indiceAtual = 0; // Índice para controlar qual enigma está sendo exibido
 function exibirEnigmas() {
+    document.getElementById("containerQuiz").classList.add("hidden")
+
     // Array - ID - - Argumento do array
     container.style.display = "none";
 
@@ -224,22 +315,78 @@ function exibirEnigmas() {
     containerDesafios.innerHTML = "";
 
     containerDesafios.innerHTML += `
-    <h2>Desafios</h2>
+    ${enigmas[indiceAtual].titulo ? `<h2>${enigmas[indiceAtual].titulo}</h2>`: `<h2>Desafio - ${enigmas[indiceAtual].id} </h2>`} 
     <div>
-        ${enigmas[indiceAtual].pergunta}
-        ${enigmas[indiceAtual].imagem ? `<img src="${enigmas[indiceAtual].imagem}" alt="Imagem do desafio" style="max-width: 100%; height: auto;">` : ""}
+        ${enigmas[indiceAtual].pergunta ? enigmas[indiceAtual].pergunta : "" }
+        ${enigmas[indiceAtual].imagem ? `<img src="${enigmas[indiceAtual].imagem}" alt="Imagem do desafio" style="width: 30%;">` : ""}
     </div>
+    <br>
     <button onclick="proximoEnigma()" class="btn btn-primary">Seguinte</button>
+    <svg xmlns="http://www.w3.org/2000/svg" onclick="mostrarResposta()" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+</svg>
+    <a target="_blank" href="/src/templates/inicio.html">pódio</a>
+
     `;
-    
+
 }
 
 function proximoEnigma() {
     indiceAtual++;
-    
+
     if (indiceAtual < enigmas.length) {
         exibirEnigmas();
     } else {
-        window.location.href = "podio.html";
+        window.location.href = "/src/templates/podio.html";
     }
 }
+
+function mostrarResposta() {
+    const resposta = enigmas[indiceAtual].resposta;
+    alert(`Resposta: ${resposta}`);
+}
+
+
+//SOBRE O DEV
+document.getElementById("btnSobre").addEventListener("click", () => {
+    container.classList.add("hidden")
+    containerTime.classList.add("hidden")
+    document.getElementById("viewSobre").classList.remove("hidden")
+    btnSobre.style.display = "none";
+});
+document.getElementById("btnBackSobre").addEventListener("click", () => {
+    container.classList.remove("hidden")
+    containerTime.classList.remove("hidden")
+    document.getElementById("viewSobre").classList.add("hidden")
+    btnSobre.style.display = "block";
+});
+
+
+
+function contagemRegressiva() {
+        const contagemElement = document.getElementById("contagem");
+        let tempoRestante = 22; // Tempo em segundos 
+
+        setInterval(() => {
+            if (tempoRestante > 0) {
+                console.log(`O jogo começa em ${tempoRestante} segundos...`);
+                contagemElement.textContent = `O jogo começa em ${tempoRestante} segundos...`;
+                tempoRestante--;
+            } else {
+                som_pre_quiz.pause()
+                som_quiz.play();
+                console.log("O jogo começou!");
+                contagemElement.textContent = "O jogo começou!";
+                document.getElementById("containerTime").classList.add("hidden");
+                document.getElementById("containerQuiz").classList.add("hidden");
+                document.getElementById("containerDesafios").classList.remove("hidden");
+                exibirEnigmas();
+                clearInterval(this);
+            }
+        }, 1000);
+}
+
+
+
+

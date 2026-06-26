@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,10 @@
         font-family: Arial, sans-serif;
         background: #0f172a;
         color: white;
+    }
+
+    .hidden {
+        display: none;
     }
 
     /* CONTAINER */
@@ -129,29 +133,48 @@
         font-size: 12px;
         color: #aaa;
     }
+        .containerSuspense {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 </style>
 
 <body>
 
+    <div class="containerSuspense" id="containerSuspense">
+        <h1 id="textoSuspense">Calculando resultados...</h1>
+    </div>
 
-    <div class="podio-container">
+
+    <div class="hidden" id="podioContainer">
 
         <!-- PODIO PRINCIPAL -->
         <div class="podio" id="podio">
-            
+
 
         </div>
 
         <!-- RESTO DOS PARTICIPANTES -->
         <div class="lista-resto" id="restoPodio">
 
-            
+
         </div>
 
     </div>
 
-    <button class="btn btn-secondary" onclick="window.location.href = '/'">Voltar para início</button>
+    <button class="btn btn-secondary" style="position: absolute; bottom: 20px; right: 20px;" onclick="window.location.href = '/'">Voltar para início</button>
+
 </body>
 <script src="/src/js/podioscripts.js"></script>
+
+<script>
+    const audioSuspense = new Audio("/src/media/efeitos_sonoros_tambor_de_guerra_2_2020_mp3_37520 (mp3cut.net).mp3");
+    const audio = new Audio("/src/media/main_theme_party_hard_soundtrack_mp3_33748.mp3");
+
+    audioSuspense.play();
+
+</script>
 
 </html>

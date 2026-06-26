@@ -12,13 +12,13 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="container">
         <h1>PLATAFORMA SUPER JUNHO</h1>
 
         <div class="containerBtn">
             <button class="btnAbrirModal" onclick="abrirModal()">Criar Time</button>
             <button class="btnDeleteTime" onclick="deletarTime()">Apagar Time</button>
-            <button class="btnIniciar" onclick="acessarPainelAdm()">Gerir Times</button>
+            <button class="btnAdm" onclick="acessarPainelAdm()">Gerir Times</button>
         </div>
         <div class="hidden" id="modal">
             <div class="modal-content">
@@ -27,7 +27,7 @@
                 <!-- <form id="criarTimeForm"> -->
                 <label for="nomeTime">Nome do Time:</label>
                 <input type="text" id="nomeTime" name="nomeTime" required>
-                <div style="display: flex; justify-content: center; align-items: center;" >
+                <div style="display: flex; justify-content: center; align-items: center;">
                     <input type="file" name="picture" id="picture" accept="image/*" required>
                     <span style="cursor: pointer;" onclick="limparInputFile()">&times;</span>
                 </div>
@@ -37,17 +37,57 @@
         </div>
     </div>
     <br>
-
-    <div id="containerTime">
+    <div class="containerTime" id="containerTime1">
         <h2 id="titleTime">Times Criados</h2>
         <div id="listaTimes">
+
             <!-- Os times criados serão adicionados aqui -->
         </div>
         <button class="btnIniciar" id="btnIniciar" onclick="iniciarJogo()">Iniciar</button>
 
     </div>
 
+    <!-- ------------ SEGUNDO CONTAINER EXIBIR TIME------------ -->
+    <div class="hidden" id="containerQuiz">
+        <h1>BEM VINDO EQUIPE(s)</h1>
+        <div id="containerTime" class="containerTime">
+            <h2>Times Criados</h2>
+            <div id="listaTimes2">
+
+                <!-- Os times criados serão adicionados aqui -->
+            </div>
+            <p id="contagem"></p>
+        </div>
+        <a href="/" class="btn btn-secondary">Voltar em casa</a>
+        <button class="btn btn-primary" onclick="exibirEnigmas()">Avançar</button>
+    </div>
+    <!-- OS DESAFIOS APARECEM AQUI -->
+    <div class="hidden" id="containerDesafios">
+
+    </div>
+    <button id="btnSobre" style="position:absolute; bottom: 10px; right: 10px;" class="btn btn-secondary">Sobre o
+        Dev</button>
+    <!-- Sobre o dev -->
+    <div class="hidden" id="viewSobre">
+        <label for="">Desenvolvedor: Seth Lussueki</label><br>
+        <label for="">Email: sethlussueki@gmail.com</label><br>
+        <a href="https://web.facebook.com/Sejogal0" target="_blank"><img class="icon-rede"
+                src="https://th.bing.com/th/id/R.70ecfdd862bdc3fdbf5715085812f49e?rik=fDJPk4oWTEisvw&pid=ImgRaw&r=0"
+                alt=""></a>
+        <a href="https://www.instagram.com/sejogal_oficial/" target="_blank"><img class="icon-rede"
+                src="https://th.bing.com/th/id/OIP.QH5gKFxERjtTRIGZAdEPVwHaHZ?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt=""></a>
+        <a href="https://www.linkedin.com/in/seth-lussueki-5b36a7392/" target="_blank"><img class="icon-rede"
+                src="https://th.bing.com/th/id/OIP.svgoUT8hREgpphnOVj1NTgHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt=""></a>
+        <a href="https://github.com/Sejogal" target="_blank"><img class="icon-rede"
+                src="https://static.vecteezy.com/system/resources/previews/025/270/403/original/github-logo-icon-free-vector.jpg"
+                alt=""></a>
+        <button class="btn btn-secondary" id="btnBackSobre">Voltar</button>
+    </div>
+
 </body>
 <script src="/src/js/script.js"></script>
+
 
 </html>

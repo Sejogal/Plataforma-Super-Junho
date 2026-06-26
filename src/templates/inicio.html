@@ -11,42 +11,50 @@
 </head>
 
 <body>
-    <div class="container" id="container">
-        <h1>BEM VINDO EQUIPE(s)</h1>
-        <div id="containerTime">
-            <h2>Times Criados</h2>
-            <div id="listaTimes">
-                <!-- Os times criados serão adicionados aqui -->
-            </div>
+    <div class="container">
+        <center><h2>Pódio</h2></center>
+        <div id="listaTimes">
+
+
         </div>
-        <a href="/" class="btn btn-secondary">Voltar em casa</a>
-        <button class="btn btn-primary" onclick="exibirEnigmas()">Avançar</button>
     </div>
 
-    <div class="hidden" id="containerDesafios">
-        
-        
-    </div>
+    <!-- <audio id="audio" autoplay src="/src/media/som_pre_quiz.mp3"></audio> -->
 </body>
-<script src="/src/js/script.js"></script>
 <script>
-    function contagemRegressiva() {
-    const contagemElement = document.getElementById("contagem");
-    let tempoRestante = 5; // Tempo em segundos 
+    const dadosTimeMaster = JSON.parse(localStorage.getItem("dadosTimeMaster")) || [];
 
-    setInterval(() => {
-        if (tempoRestante > 0) {
-            console.log(`O jogo começa em ${tempoRestante} segundos...`);
-            tempoRestante--;
-        } else {
-            console.log("O jogo começou!");
-        }
-    }, 1000);
-}
 
-    window.onload = () => {
-        contagemRegressiva();
+    function verPodio() {
+        const listaTimes = document.getElementById("listaTimes");
+
+        listaTimes.innerHTML = "";
+
+        dadosTimeMaster.forEach((time) => {
+
+            listaTimes.innerHTML += `
+        <div>
+            <img 
+                style="border-radius:50%; border:2px solid #333;" 
+                src="${time.picture}" 
+                alt="${time.nomeDoTime}" 
+                width="70" 
+                height="70"
+            >
+
+            ${time.nomeDoTime}: ${time.pontos} pontos
+        </div>
+        `;
+
+        });
+
     }
+
+    verPodio()
+
+
 </script>
+
+
 
 </html>

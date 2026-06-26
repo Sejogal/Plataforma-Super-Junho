@@ -1,3 +1,6 @@
+const dadosTimeMaster = JSON.parse(localStorage.getItem("dadosTimeMaster")) || [];
+
+
 function ordenarTimesPorPontos(times) {
     return [...times].sort((a, b) => b.pontos - a.pontos);
 }
@@ -61,3 +64,53 @@ function exibirPodio() {
 }
 
 exibirPodio();
+
+function mostrarTextoSuspense() {
+    const textoElement = document.getElementById("textoSuspense");
+    let index = 0;
+    const intervalo = setInterval(() => {
+        if (index < textosSuspense.length) {
+            textoElement.textContent = textosSuspense[index];
+            index++;
+        } else {
+            clearInterval(intervalo);
+        }
+    }, 4000); // Altera o texto a cada 4 segundos
+}
+
+mostrarTextoSuspense();
+
+    let podioContainer = document.getElementById("podioContainer");
+    let containerSuspense = document.getElementById("containerSuspense");
+
+    //Exibir o pódio após 25 segundos (tempo para criar suspense)
+    //    setTimeout(() => {
+    //     podioContainer.classList.remove("hidden");
+    //     podioContainer.classList.add("podio-container");
+    //     containerSuspense.classList.add("hidden");
+    //     audioSuspense.pause();
+    //     audio.play();
+    //    }, 25000);
+
+    document.addEventListener("click", () => {
+        podioContainer.classList.remove("hidden");
+        podioContainer.classList.add("podio-container");
+        containerSuspense.classList.remove("containerSuspense");
+        containerSuspense.classList.add("hidden");
+        audioSuspense.pause();
+        audio.play();
+    }, { once: true });
+
+    const textosSuspense = [
+        "Calculando resultados...",
+        "Analisando desempenho dos times...",
+        "Quase lá...",
+        "Preparando o pódio...",
+        `Será que o time ${dadosTimeMaster[0] ? dadosTimeMaster[0].nomeDoTime : "X"} vai ganhar?`,
+        `E o time ${dadosTimeMaster[1] ? dadosTimeMaster[1].nomeDoTime : "Y"}?`,
+        `O time ${dadosTimeMaster[2] ? dadosTimeMaster[2].nomeDoTime : "Z"} está na disputa...`,
+        "A tensão está no ar..."
+    ];
+
+
+    
