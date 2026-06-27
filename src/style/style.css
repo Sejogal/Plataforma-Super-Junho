@@ -1,265 +1,467 @@
+/* ==========================
+        RESET
+==========================*/
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-h1{
-    font-size: 36px;
-    color: #007BFF;
-    text-align: center;
-    margin-bottom: 20px;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    color: #333;
-    padding: 20px;
-    background-image: url('/src/media/3.png');
-    background-size: cover;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#333;
+    padding:20px;
+
+    background:
+        linear-gradient(rgba(12,20,40,.72),rgba(12,20,40,.72)),
+        url("/src/media/3.png");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    min-height:100vh;
 }
-.btnAbrirModal{
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+/*=========================
+        TITULOS
+=========================*/
+
+h1{
+    text-align:center;
+    font-size:42px;
+    color:#fff;
+    margin-bottom:25px;
+    text-shadow:0 5px 12px rgba(0,0,0,.4);
 }
-.btnCriarTime{
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+h2{
+    text-align:center;
+    color:#1d4ed8;
+    margin-bottom:20px;
 }
-.btnDeleteTime{
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #FF0000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+p{
+    font-size:18px;
+    line-height:1.6;
 }
-.btnIniciar{
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+/*=========================
+      CONTAINERS
+=========================*/
+
+.container,
+.containerTime,
+.containerPontos,
+.containerDesafios{
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    max-width:720px;
+
+    margin:auto;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    border:1px solid rgba(255,255,255,.35);
+
 }
-.btnAdm{
-    background-color: #222;
-    color: white;
-     display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.container{
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-}
+
+/*=========================
+      BOTÕES
+=========================*/
+
 .containerBtn{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-/* MODAL */
-/* Fundo da modal */
-.modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    z-index: 999;
+button{
+
+    border:none;
+    border-radius:12px;
+    padding:12px 22px;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:bold;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
 }
 
-/* Caixa da modal */
-.modal-content {
-    background: #ffffff;
-    width: 90%;
-    max-width: 420px;
-    padding: 30px;
-    border-radius: 20px;
-    position: relative;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+button:hover{
 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    transform:translateY(-3px);
 
-    animation: aparecer 0.3s ease;
 }
 
-/* Animação */
-@keyframes aparecer {
-    from{
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+.btnAbrirModal{
+
+    background:#0d6efd;
+    color:#fff;
+
 }
 
-/* Título */
-.modal-content h2{
-    text-align: center;
-    color: #222;
-    font-size: 28px;
-    margin-bottom: 10px;
+.btnDeleteTime{
+
+    background:#dc3545;
+    color:#fff;
+
 }
 
-/* Labels */
-.modal-content label{
-    font-size: 15px;
-    color: #444;
-    font-weight: 600;
+.btnAdm{
+
+    background:#212529;
+    color:white;
+
 }
 
-/* Inputs */
-.modal-content input[type="text"],
-.modal-content input[type="file"]{
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #dcdcdc;
-    border-radius: 12px;
-    outline: none;
-    transition: 0.3s;
-    font-size: 15px;
-    background: #f8f8f8;
+.btnIniciar{
+
+    display:block;
+    margin:25px auto 0;
+    width:220px;
+
+    background:#198754;
+    color:white;
+
 }
 
-.modal-content input[type="text"]:focus,
-.modal-content input[type="file"]:focus{
-    border-color: #d4af37;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
-}
-
-/* Botão */
 .btnCriarTime{
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: #d4af37;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+
+    width:100%;
+
+    background:#d4af37;
+    color:white;
+
+    font-size:16px;
+
+}
+
+/*=========================
+        MODAL
+=========================*/
+
+.modal{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    backdrop-filter:blur(5px);
+
+    z-index:999;
+
+}
+
+.modal-content{
+
+    background:white;
+
+    width:95%;
+
+    max-width:450px;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    position:relative;
+
+    animation:aparecer .35s ease;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+        transform:translateY(-20px) scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+.modal-content h2{
+
+    color:#222;
+
+}
+
+.modal-content label{
+
+    font-weight:bold;
+
+}
+
+.modal-content input[type=text],
+.modal-content input[type=file]{
+
+    width:100%;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    padding:14px;
+
+    background:#fafafa;
+
+    transition:.3s;
+
+}
+
+.modal-content input:focus{
+
+    outline:none;
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 0 4px rgba(13,110,253,.18);
+
 }
 
 .btnCriarTime:hover{
-    transform: translateY(-2px);
-    background: #c29b22;
-    box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+
+    background:#c59c20;
+
 }
 
-/* Botão fechar */
 .close{
-    position: absolute;
-    top: 15px;
-    right: 18px;
-    font-size: 28px;
-    color: #666;
-    cursor: pointer;
-    transition: 0.3s;
+
+    position:absolute;
+
+    right:18px;
+
+    top:12px;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
 }
 
 .close:hover{
-    color: #d4af37;
-    transform: rotate(90deg);
+
+    transform:rotate(90deg);
+
+    color:#d4af37;
+
 }
 
-.hidden{
-    display: none; 
-}
-.show{
-    display: block; 
+/*=========================
+      TIMES
+=========================*/
+
+#listaTimes,
+#listaTimes2{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:18px;
+
+    margin-top:20px;
+
 }
 
-.containerPontos{
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-p{
-    font-size: 18px;
-    line-height: 1.6;
-    margin-top: 20px;
+/*Caso o JS crie divs*/
+
+#listaTimes>div,
+#listaTimes2>div{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
 }
 
-.containerTime{
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: 0 auto;
+#listaTimes>div:hover,
+#listaTimes2>div:hover{
+
+    transform:translateY(-5px);
+
 }
 
-#containerTime div{
-    font-size: 18px;
-    line-height: 1.6;
-    margin-top: 20px;
+/*Imagem do time*/
+
+#listaTimes img,
+#listaTimes2 img{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid #d4af37;
+
+    margin-bottom:10px;
+
 }
 
-.containerDesafios{
-    display: block;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-}
+/*=========================
+        SOBRE
+=========================*/
 
 #viewSobre{
-    margin-top: 15%;
-    margin-left: 2%;
-    backdrop-filter: blur(3px);
-    font-size: 30px;
-    height: 100%;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
-    font-weight: bold;
-    padding: 1%;
-    animation: fadeIn 1s ease forwards;
+
+    max-width:700px;
+
+    margin:70px auto;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
 }
-/* #viewSobre a:hover{
-    border-bottom: 2px solid #1e3a8a;
-} */
+
 #viewSobre label{
-    font-size: 100%;
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-size:22px;
+
 }
-.icon-rede {
-    width: 5%;
-    border-radius: 50%;
+
+.icon-rede{
+
+    width:55px;
+
+    height:55px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin:12px;
+
+    transition:.3s;
+
+}
+
+.icon-rede:hover{
+
+    transform:scale(1.15);
+
+}
+
+/*=========================
+        UTILIDADES
+=========================*/
+
+.hidden{
+
+    display:none;
+
+}
+
+.show{
+
+    display:block;
+
+}
+
+/*=========================
+        RESPONSIVO
+=========================*/
+
+@media(max-width:768px){
+
+    h1{
+
+        font-size:30px;
+
+    }
+
+    .containerBtn{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    button{
+
+        width:100%;
+
+        max-width:300px;
+
+    }
+
+    .container,
+    .containerTime,
+    .containerDesafios{
+
+        width:100%;
+
+    }
+
+    #viewSobre label{
+
+        font-size:18px;
+
+    }
+
+    .icon-rede{
+
+        width:45px;
+        height:45px;
+
+    }
+
 }

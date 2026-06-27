@@ -5,7 +5,7 @@ const senhaUniversal = "bi39copr";
 const audio = new Audio("/src/media/main_theme_party_hard_soundtrack_mp3_33748.mp3");
 
 audio.play();
-audio.loop=true
+audio.loop = true
 
 const som_quiz = new Audio("/src/media/som_quiz.mp3")
 const som_pre_quiz = new Audio("/src/media/som_pre_quiz.mp3")
@@ -151,7 +151,7 @@ function iniciarJogo() {
     if (dadosTimeMaster.length === 0) {
         alert("Crie um time para iniciar o jogo!");
     }
-    else{
+    else {
         audio.pause();
         som_pre_quiz.play();
         exibirTimes()
@@ -159,7 +159,7 @@ function iniciarJogo() {
         containerQuiz.classList.add("container");
         container.classList.add("hidden");
         document.getElementById("containerTime1").classList.add("hidden")
-        document.getElementById("btnSobre").style.display ="none"
+        document.getElementById("btnSobre").style.display = "none"
         contagemRegressiva()
     }
 }
@@ -224,7 +224,7 @@ const enigmas = [
         id: 4,
         pergunta: "“Emito som todos os domingo mesmo sem boca?”",
         resposta: "COLUNA",
-        imagem: "/src/img/coluna.png" //qrcode será imprimido
+        imagem: "/src/media/COLUNA.png" //qrcode será imprimido
     },
     {
         id: 5,
@@ -247,58 +247,60 @@ const enigmas = [
         titulo: "Lógica",
     },
     {
+        id: 7,
         titulo: "Jogo da Velha no quadro",
-        resposta: "X - O"
+        pergunta: "X - O"
     },
     {
-        
         titulo: "Liga Números",
         pergunta: "Os participantes devem ligar os números no quadro sem cruzar as linhas",
         imagem: "/src/media/jogos-logica-spj/liga-numeros-sem-chocar.png"
     },
     {
-        
+        id: 8,
         titulo: "Move um pau",
         pergunta: "Os participantes devem mover um pau e completar a operação",
         imagem: "/src/media/jogos-logica-spj/mova-um-pau.png"
     },
     {
-        titulo: "SUDOKU",
+        id: 9,
+        titulo: "Descubra os números e símbolos",
         pergunta: "Os participantes devem jogar no quadro....",
-        imagem: "/src/media/jogos-logica-spj/sudoku.png"
+        imagem: "/src/media/mathcross.png"
     },
     {
-       
+        id: 10,
         titulo: "Remova uma linha",
         pergunta: "Remova uma linha e faça um quadrado....",
         imagem: "/src/media/jogos-logica-spj/remove-uma-linha-e-quadrado .png"
     },
     {
-    
+        id: 11,
         titulo: "Soma das letras",
-        pergunta: "Remova uma linha e faça um quadrado....",
-        imagem: "/src/media/4.png"
+        pergunta: "",
+        imagem: "/src/media/SOMA LETRAS - COPIA.png"
     },
     {
         //Sequência numérica
-      
+        id: 12,
         titulo: "2, 4, 8, 16, ?",
         resposta: "32"
     },
 
     // Última rodada
     {
+        id: 13,
         titulo: "“Hora do desafio KAHOOT”",
         pergunta: "Leiam o QR CODE no objeto do Desafio - 4",
-        imagem: "/src/img/kahoot.png"
+        imagem: ""
     },
     // FIM
     {
-        id: 100,
-        titulo:"“DESAFIO FINAL”",
+        id: 14,
+        titulo: "“DESAFIO FINAL”",
         pergunta: "As equipes irão pegar as 2 primeiras letras das respostas correta 1,2,4,5 e formar a senha para completar o desafio final.",
-        resposta: "As equipes irão pegar os 2 primeiros caractéres das respostas correta 1,2,4,5 e formar a senha para desbloquear o prêmio.",
-        imagem: "/src/img/desafio_final.png"
+        resposta: "Leiam o qr-code",
+        imagem: "/src/media/qrcode_quiz-feira-comunit-ria.onrender.com.png"
     }
 
 ]
@@ -315,11 +317,12 @@ function exibirEnigmas() {
     containerDesafios.innerHTML = "";
 
     containerDesafios.innerHTML += `
-    ${enigmas[indiceAtual].titulo ? `<h2>${enigmas[indiceAtual].titulo}</h2>`: `<h2>Desafio - ${enigmas[indiceAtual].id} </h2>`} 
+    ${enigmas[indiceAtual].titulo ? `<h2>${enigmas[indiceAtual].titulo}</h2>` : `<h2>Desafio - ${enigmas[indiceAtual].id} </h2>`} 
     <div>
-        ${enigmas[indiceAtual].pergunta ? enigmas[indiceAtual].pergunta : "" }
+        <p>${enigmas[indiceAtual].pergunta ? enigmas[indiceAtual].pergunta : ""}</p>
         ${enigmas[indiceAtual].imagem ? `<img src="${enigmas[indiceAtual].imagem}" alt="Imagem do desafio" style="width: 30%;">` : ""}
     </div>
+    <div id="qrcode"></div>
     <br>
     <button onclick="proximoEnigma()" class="btn btn-primary">Seguinte</button>
     <svg xmlns="http://www.w3.org/2000/svg" onclick="mostrarResposta()" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -351,13 +354,13 @@ function mostrarResposta() {
 //SOBRE O DEV
 document.getElementById("btnSobre").addEventListener("click", () => {
     container.classList.add("hidden")
-    containerTime.classList.add("hidden")
+    containerTime1.classList.add("hidden")
     document.getElementById("viewSobre").classList.remove("hidden")
     btnSobre.style.display = "none";
 });
 document.getElementById("btnBackSobre").addEventListener("click", () => {
     container.classList.remove("hidden")
-    containerTime.classList.remove("hidden")
+    containerTime1.classList.remove("hidden")
     document.getElementById("viewSobre").classList.add("hidden")
     btnSobre.style.display = "block";
 });
@@ -365,28 +368,46 @@ document.getElementById("btnBackSobre").addEventListener("click", () => {
 
 
 function contagemRegressiva() {
-        const contagemElement = document.getElementById("contagem");
-        let tempoRestante = 22; // Tempo em segundos 
+    const contagemElement = document.getElementById("contagem");
+    let tempoRestante = 22; // Tempo em segundos 
 
-        setInterval(() => {
-            if (tempoRestante > 0) {
-                console.log(`O jogo começa em ${tempoRestante} segundos...`);
-                contagemElement.textContent = `O jogo começa em ${tempoRestante} segundos...`;
-                tempoRestante--;
-            } else {
-                som_pre_quiz.pause()
-                som_quiz.play();
-                console.log("O jogo começou!");
-                contagemElement.textContent = "O jogo começou!";
-                document.getElementById("containerTime").classList.add("hidden");
-                document.getElementById("containerQuiz").classList.add("hidden");
-                document.getElementById("containerDesafios").classList.remove("hidden");
-                exibirEnigmas();
-                clearInterval(this);
-            }
-        }, 1000);
+    setInterval(() => {
+        if (tempoRestante > 0) {
+            console.log(`O jogo começa em ${tempoRestante} segundos...`);
+            contagemElement.textContent = `O jogo começa em ${tempoRestante} segundos...`;
+            tempoRestante--;
+        } else {
+            som_pre_quiz.pause()
+            som_quiz.play();
+            console.log("O jogo começou!");
+            contagemElement.textContent = "O jogo começou!";
+            document.getElementById("containerTime").classList.add("hidden");
+            document.getElementById("containerQuiz").classList.add("hidden");
+            document.getElementById("containerDesafios").classList.remove("hidden");
+            exibirEnigmas();
+            clearInterval(this);
+        }
+    }, 1000);
+}
+
+function gerarQR() {
+    let link = "https://pt.wikipedia.org/wiki/Pulm%C3%B5es"
+    const enigmaAtual = enigmas[16].id
+
+    console.log(enigmaAtual)
+
+    document.getElementById("qrcode").innerHTML = "";
+
+    if (enigmaAtual != undefined) {
+        alert("200")
+        new QRCode(document.getElementById("qrcode"), {
+            text: link,
+            width: 200,
+            height: 200
+        });
+    }
+
 }
 
 
-
-
+gerarQR()
